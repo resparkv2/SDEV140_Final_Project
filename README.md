@@ -4,9 +4,9 @@ Final Project for SDEV140
 In order to run the code effectively, you need to download a few modules using
 the command terminal in Windows. Copy and paste what I have below:
 
-pip install BeautifulSoup4
-pip install requests
-pip install pillow
+pip install BeautifulSoup4\n
+pip install requests\n
+pip install pillow\n
 
 If you see yellow text with a file path, copy everything between the quotation marks and follow the next steps:
 
