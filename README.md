@@ -1,7 +1,7 @@
 # SDEV140_Final_Project
 Final Project for SDEV140
 
-**MAIN PYTHON CODE**
+**MAIN PYTHON CODE:**
 
   In order to run the code effectively, you need to download a few modules using
   the command terminal in Windows. Copy and paste what I have below:
@@ -26,7 +26,7 @@ Final Project for SDEV140
 
   
 
-**PICTURES**
+**PICTURES:**
 
   To make sure that the pictures work, drag the into your current working directory. If you don't know
   what file path that is, you can run the following command in an empty python window to get your 
