@@ -22,7 +22,6 @@ Final Project for SDEV140
   6. In the first available slot, paste the text you copied from the command prompt.
   7. Restart your computer(optional)
   
-  Make sure you have the image labeled "cloudy.png" and put it in your current working directory for it to work as well
 
   
 
