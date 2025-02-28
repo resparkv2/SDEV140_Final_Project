@@ -6,10 +6,12 @@ from PIL import ImageTk, Image
 
 #Changes the picture based on what the predicition says
 def changePicture(prediction):
-    global watchImg, rainyImg, cloudyImg, showersInVicinityImg, sunnyImg, errorImg
 
+    #Forces all charaters to become lowercase
     tempPrediction = prediction.lower()
 
+    #Determines what is in the temperature label
+    #and changes the picture accodingly
     if "watch" in tempPrediction:
         imageLabel.config(image = watchImg, padx = 200)
     elif "rainy" in tempPrediction:
@@ -20,24 +22,36 @@ def changePicture(prediction):
         imageLabel.config(image = showersInVicinityImg, padx = 200)
     elif "sunny" in tempPrediction:
         imageLabel.config(image = sunnyImg, padx = 200)
+    elif "fair" in tempPrediction:
+        imageLabel.config(image = fairImg, padx = 200)
+    elif "wind" in tempPrediction:
+        imageLabel.config(image = windyImg, padx = 200)
+    elif "snow" in tempPrediction:
+        imageLabel.config(image = snowImg, padx = 200)
     else:
         imageLabel.config(image = errorImg, padx = 200)
 
-#Gets the weather for Fishers and updates the labels accordingly
-def getFishersWeather():
-    url = "https://weather.com/weather/today/l/73775994a7930975506f2796531c2564e93815bc2ccaafc200f80950408ffa07" 
-    page = requests.get(url)
+#Gets the information from the website and updates labels accordingly
+def getWebsiteInfoAndUpdateLabels(inUrl):
+    page = requests.get(inUrl)
     soup = BeautifulSoup(page.content, "html.parser")
     location = soup.find("h1", class_ = "CurrentConditions--location--yub4l").text
     temperature = soup.find("span", class_="CurrentConditions--tempValue--zUBSz").text
     weatherPred = soup.find("div", class_ = "CurrentConditions--phraseValue---VS-k").text
-    
 
     locationLabel.config(text = location)
     temperatureLabel.config(text = temperature)
     weatherPredictionLabel.config(text = weatherPred)
     changePicture(weatherPred)
 
+#Gets the weather for Fishers and updates the labels accordingly
+def getFishersWeather():
+    url = "https://weather.com/weather/today/l/73775994a7930975506f2796531c2564e93815bc2ccaafc200f80950408ffa07" 
+    
+    getWebsiteInfoAndUpdateLabels(url)
+
+    #Changes the state of the buttons so that the
+    #same one isn't clicked twice in a row
     carmelButton.config(state = tk.NORMAL)
     noblesvilleButton.config(state = tk.NORMAL)
     indianapolisButton.config(state = tk.NORMAL)
@@ -50,17 +64,11 @@ def getFishersWeather():
 #Gets the weather for Carmel and updates the labels accordingly
 def getCarmelWeather():
     url = "https://weather.com/weather/today/l/e26b2194d6f80bdb4b821313b1cff7352e643869ce69dacfc9bfc10b2dfdd2cb" 
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    location = soup.find("h1", class_ = "CurrentConditions--location--yub4l").text
-    temperature = soup.find("span", class_="CurrentConditions--tempValue--zUBSz").text
-    weatherPred = soup.find("div", class_ = "CurrentConditions--phraseValue---VS-k").text
+    
+    getWebsiteInfoAndUpdateLabels(url)
 
-    locationLabel.config(text = location)
-    temperatureLabel.config(text = temperature)
-    weatherPredictionLabel.config(text = weatherPred)
-    changePicture(weatherPred)
-
+    #Changes the state of the buttons so that the
+    #same one isn't clicked twice in a row
     fishersButton.config(state = tk.NORMAL)
     noblesvilleButton.config(state = tk.NORMAL)
     indianapolisButton.config(state = tk.NORMAL)
@@ -73,17 +81,11 @@ def getCarmelWeather():
 #Gets the weather for Noblesville and updates the labels accordingly
 def getNoblesvilleWeather():
     url = "https://weather.com/weather/today/l/442e2584ec0fb4766e9030444eaa55ed476b6e9a2c58fe62af93040e101b5933" 
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    location = soup.find("h1", class_ = "CurrentConditions--location--yub4l").text
-    temperature = soup.find("span", class_="CurrentConditions--tempValue--zUBSz").text
-    weatherPred = soup.find("div", class_ = "CurrentConditions--phraseValue---VS-k").text
+    
+    getWebsiteInfoAndUpdateLabels(url)
 
-    locationLabel.config(text = location)
-    temperatureLabel.config(text = temperature)
-    weatherPredictionLabel.config(text = weatherPred)
-    changePicture(weatherPred)
-
+    #Changes the state of the buttons so that the
+    #same one isn't clicked twice in a row
     fishersButton.config(state = tk.NORMAL)
     carmelButton.config(state = tk.NORMAL)
     indianapolisButton.config(state = tk.NORMAL)
@@ -96,17 +98,11 @@ def getNoblesvilleWeather():
 #Gets the weather for Indianapolis and updates the labels accordingly
 def getIndianapolisWeather():
     url = "https://weather.com/weather/today/l/1fadb5d65825dc7bf21e6e498bc46194118171fedee813143ae33e4e0907114c" 
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    location = soup.find("h1", class_ = "CurrentConditions--location--yub4l").text
-    temperature = soup.find("span", class_="CurrentConditions--tempValue--zUBSz").text
-    weatherPred = soup.find("div", class_ = "CurrentConditions--phraseValue---VS-k").text
+    
+    getWebsiteInfoAndUpdateLabels(url)
 
-    locationLabel.config(text = location)
-    temperatureLabel.config(text = temperature)
-    weatherPredictionLabel.config(text = weatherPred)
-    changePicture(weatherPred)
-
+    #Changes the state of the buttons so that the
+    #same one isn't clicked twice in a row
     fishersButton.config(state = tk.NORMAL)
     carmelButton.config(state = tk.NORMAL)
     noblesvilleButton.config(state = tk.NORMAL)
@@ -129,13 +125,16 @@ sunnyImgLoc = str(cwd) + "\\sunny.png"
 watchImgLoc = str(cwd) + "\\watch.png"
 rainyImgLoc = str(cwd) + "\\rainy.png"
 errorImgLoc = str(cwd) + "\\error.png"
+fairImgLoc = str(cwd) + "\\fair.png"
+windyImgLoc = str(cwd) + "\\windy.png"
+snowImgLoc = str(cwd) + "\\snow.png"
 
 #Creates the window
 master = tk.Tk()
 master.title("Weather App")
 master.config(bg = "white")
 
-#Opens the home image, resizes it, then sets it to homeImg
+#Opens the deafult image, resizes it, then sets it to homeImg
 homeImg = Image.open(homeImgLoc)
 homeImg = homeImg.resize((150, 150))
 homeImg = ImageTk.PhotoImage(homeImg)
@@ -165,10 +164,26 @@ rainyImg = Image.open(rainyImgLoc)
 rainyImg = rainyImg.resize((150, 150))
 rainyImg = ImageTk.PhotoImage(rainyImg)
 
-#Opens the error image, resizes it, then sets it to errorImg
+#Opens the error image, resizes it, then sets it to errorImg, happens when
+#the program doesn't recognize any of the words in the weather prediction
 errorImg = Image.open(errorImgLoc)
 errorImg = errorImg.resize((150, 150))
 errorImg = ImageTk.PhotoImage(errorImg)
+
+#Opens the fair image, resizes it, then sets it to fairImg
+fairImg = Image.open(fairImgLoc)
+fairImg = fairImg.resize((150, 150))
+fairImg = ImageTk.PhotoImage(fairImg)
+
+#Opens the windy image, resizes it, then sets it to windyImg
+windyImg = Image.open(windyImgLoc)
+windyImg = windyImg.resize((150, 150))
+windyImg = ImageTk.PhotoImage(windyImg)
+
+#Opens the snow image, resizes it, then sets it to snowImg
+snowImg = Image.open(snowImgLoc)
+snowImg = snowImg.resize((150, 150))
+snowImg = ImageTk.PhotoImage(snowImg)
 
 #Location of the weather
 locationLabel = tk.Label(master, text = "Select a location to see the weather", font = ("Calibri bold", 20), bg = "white")
