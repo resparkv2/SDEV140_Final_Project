@@ -7,7 +7,7 @@ from PIL import ImageTk, Image
 #Changes the picture based on what the predicition says
 def changePicture(prediction):
 
-    #Forces all charaters to become lowercase
+    #Forces all characters to become lowercase
     tempPrediction = prediction.lower()
 
     #Determines what is in the temperature label
