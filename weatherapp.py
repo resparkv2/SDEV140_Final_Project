@@ -31,6 +31,22 @@ def changePicture(prediction):
     else:
         imageLabel.config(image = errorImg, padx = 200)
 
+def updateTimeLabel():
+    timeUrl = "https://www.timeanddate.com/worldclock/"
+    timePage = requests.get(timeUrl)
+    timeSoup = BeautifulSoup(timePage.content, "html.parser")
+    time = timeSoup.find("td", id = "p59", class_ = "rbi").text
+
+    timeLabel.config(text = time)
+
+def updateDateLabel():
+    dateUrl = "https://www.timeanddate.com/"
+    datePage = requests.get(dateUrl)
+    dateSoup = BeautifulSoup(datePage.content, "html.parser")
+    date = dateSoup.find("span", id = "ij2").text
+
+    dateLabel.config(text = date)
+
 #Gets the information from the website and updates labels accordingly
 def getWebsiteInfoAndUpdateLabels(inUrl):
     page = requests.get(inUrl)
@@ -43,6 +59,9 @@ def getWebsiteInfoAndUpdateLabels(inUrl):
     temperatureLabel.config(text = temperature)
     weatherPredictionLabel.config(text = weatherPred)
     changePicture(weatherPred)
+
+    updateTimeLabel()
+    updateDateLabel()
 
 #Gets the weather for Fishers and updates the labels accordingly
 def getFishersWeather():
@@ -129,10 +148,23 @@ fairImgLoc = str(cwd) + "\\fair.png"
 windyImgLoc = str(cwd) + "\\windy.png"
 snowImgLoc = str(cwd) + "\\snow.png"
 
+#Gets the current time
+timeUrl = "https://www.timeanddate.com/worldclock/"
+timePage = requests.get(timeUrl)
+timeSoup = BeautifulSoup(timePage.content, "html.parser")
+time = timeSoup.find("td", id = "p59", class_ = "rbi").text
+
+#Gets the current Date
+dateUrl = "https://www.timeanddate.com/"
+datePage = requests.get(dateUrl)
+dateSoup = BeautifulSoup(datePage.content, "html.parser")
+date = dateSoup.find("span", id = "ij2").text
+
+
 #Creates the window
 master = tk.Tk()
 master.title("Weather App")
-master.config(bg = "white")
+master.config(bg = "#90D5FF")
 
 #Opens the deafult image, resizes it, then sets it to homeImg
 homeImg = Image.open(homeImgLoc)
@@ -186,20 +218,28 @@ snowImg = snowImg.resize((150, 150))
 snowImg = ImageTk.PhotoImage(snowImg)
 
 #Location of the weather
-locationLabel = tk.Label(master, text = "Select a location to see the weather", font = ("Calibri bold", 20), bg = "white")
+locationLabel = tk.Label(master, text = "Select a location to see the weather", font = ("Calibri bold", 20), bg = "#90D5FF")
 locationLabel.grid(row = 0, sticky = "N", padx = 100)
 
 #Temperature of location
-temperatureLabel = tk.Label(master, font = ("Calibri bold", 70), bg = "white")
+temperatureLabel = tk.Label(master, font = ("Calibri bold", 70), bg = "#90D5FF")
 temperatureLabel.grid(row = 1, sticky = "W", padx = 40)
 
 #Sets the first picture on the window
-imageLabel = tk.Label(master, image = homeImg, bg = "white")
+imageLabel = tk.Label(master, image = homeImg, bg = "#90D5FF")
 imageLabel.grid(row = 1, sticky = "N", padx = 200)
 
 #Creates the weather prediction and sets it on the window
-weatherPredictionLabel = tk.Label(master, font = ("Calibri bold", 15), bg = "white")
+weatherPredictionLabel = tk.Label(master, font = ("Calibri bold", 15), bg = "#90D5FF")
 weatherPredictionLabel.grid(row = 2, sticky = "W", padx = 40)
+
+#Creates the time label and sets it on the window
+timeLabel = tk.Label(master, text = time, font = ("Calibri Bold", 15), bg = "#90D5FF")
+timeLabel.grid(row = 0, column = 1, sticky = "E", pady = 50)
+
+#Creates the date label and sets it on the window
+dateLabel = tk.Label(master, text = date, font = ("Calibri bold", 20), bg = "#90D5FF")
+dateLabel.grid(row = 0, column = 1, sticky = "NE")
 
 #Creates the "Fishers Location" prediction and sets it on the window
 fishersButton = tk.Button(master, text = "Fishers Weather", font = ("Calibri bold", 10), bg = "white", command = getFishersWeather)
