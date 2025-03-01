@@ -78,7 +78,6 @@ def getFishersWeather():
 
     #Updates the window every 60 seconds
     temperatureLabel.after(60000, getFishersWeather)
-    master.update()
 
 #Gets the weather for Carmel and updates the labels accordingly
 def getCarmelWeather():
@@ -95,7 +94,6 @@ def getCarmelWeather():
 
     #Updates the window every 60 seconds
     temperatureLabel.after(60000, getCarmelWeather)
-    master.update()
 
 #Gets the weather for Noblesville and updates the labels accordingly
 def getNoblesvilleWeather():
@@ -112,7 +110,6 @@ def getNoblesvilleWeather():
 
     #Updates the window every 60 seconds
     temperatureLabel.after(60000, getNoblesvilleWeather)
-    master.update()
 
 #Gets the weather for Indianapolis and updates the labels accordingly
 def getIndianapolisWeather():
@@ -129,7 +126,6 @@ def getIndianapolisWeather():
 
     #Updates the window every 60 seconds
     temperatureLabel.after(60000, getIndianapolisWeather)
-    master.update()
 
 
 
@@ -218,7 +214,7 @@ snowImg = snowImg.resize((150, 150))
 snowImg = ImageTk.PhotoImage(snowImg)
 
 #Location of the weather
-locationLabel = tk.Label(master, text = "Select a location to see the weather", font = ("Calibri bold", 20), bg = "#90D5FF")
+locationLabel = tk.Label(master, text = "Select Location", font = ("Calibri bold", 20), bg = "#90D5FF")
 locationLabel.grid(row = 0, sticky = "N", padx = 100)
 
 #Temperature of location
@@ -235,7 +231,7 @@ weatherPredictionLabel.grid(row = 2, sticky = "W", padx = 40)
 
 #Creates the time label and sets it on the window
 timeLabel = tk.Label(master, text = time, font = ("Calibri Bold", 15), bg = "#90D5FF")
-timeLabel.grid(row = 0, column = 1, sticky = "E", pady = 50)
+timeLabel.grid(row = 0, column = 1, sticky = "E", pady = 30)
 
 #Creates the date label and sets it on the window
 dateLabel = tk.Label(master, text = date, font = ("Calibri bold", 20), bg = "#90D5FF")
