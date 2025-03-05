@@ -14,7 +14,7 @@ def changePicture(prediction):
     #and changes the picture accodingly
     if "watch" in tempPrediction:
         imageLabel.config(image = watchImg, padx = 200)
-    elif "rainy" in tempPrediction:
+    elif "rain" in tempPrediction:
         imageLabel.config(image = rainyImg, padx = 200)
     elif "cloudy" in tempPrediction:
         imageLabel.config(image = cloudyImg, padx = 200)
@@ -31,6 +31,7 @@ def changePicture(prediction):
     else:
         imageLabel.config(image = errorImg, padx = 200)
 
+#Updates the time label to current time
 def updateTimeLabel():
     timeUrl = "https://www.timeanddate.com/worldclock/"
     timePage = requests.get(timeUrl)
@@ -39,6 +40,7 @@ def updateTimeLabel():
 
     timeLabel.config(text = time)
 
+##Updates the date label to current date
 def updateDateLabel():
     dateUrl = "https://www.timeanddate.com/"
     datePage = requests.get(dateUrl)
