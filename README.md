@@ -11,6 +11,9 @@ Final Project for SDEV140
   pip install requests
   
   pip install pillow
+
+  BeautifulSoup install video: https://youtu.be/cXSg-_p9ZHw?si=vemcc35d_10B0Kwd
+  Pillow install video: https://youtu.be/Ii1Gdu8LABE?si=yzjgIjlITcA7BAKC
   
   If you see yellow text with a file path, copy everything between the quotation marks and follow the next steps:
   
